@@ -86,7 +86,7 @@
 
       <div class="input-group">
         <label>Mesafe (KM)</label>
-        <input id="km" type="number" min="0" step="1" value="0" placeholder="0">
+        <input id="km" type="number" min="0" step="1" value="" placeholder="0">
         <span class="small">Toplam yapılan yol (Gidiş + Dönüş).</span>
       </div>
 
@@ -127,7 +127,7 @@
     };
 
     function parseNumberSafe(str){
-      if(str === null || str === undefined) return 0;
+      if(str === null || str === undefined || str === '') return 0; // Boş ise 0 döndür
       const cleaned = String(str).replace(/,/g, '.').replace(/[^0-9.\-]/g,'');
       const n = parseFloat(cleaned);
       return isFinite(n) ? n : 0;
@@ -161,7 +161,7 @@
     resetBtn.addEventListener('click', ()=>{
       openingEl.value = defaults.opening;
       perKmEl.value = defaults.perKm;
-      kmEl.value = '0';
+      kmEl.value = ''; 
       resultBox.hidden = true;
     });
 
