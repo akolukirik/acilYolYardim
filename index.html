@@ -6,25 +6,59 @@
   <title>Yol Yardım Ücret Hesaplayıcı</title>
   <style>
     :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
-    body{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#071023 0%, #071827 100%);color:#e6eef6;padding:24px}
+    *, *::before, *::after { box-sizing: border-box; }
+    html{height:100%;}
+    body{
+      min-height:100vh;
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg,#071023 0%, #071827 100%);
+      color:#e6eef6;
+      padding:24px;
+    }
     .wrap{max-width:760px;width:100%}
     header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:6px 0 18px;color:var(--muted)}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 30px rgba(2,6,23,.6)}
+    .logo{
+      min-width:56px; width:56px; height:56px;
+      border-radius:8px;
+      background:linear-gradient(135deg,var(--accent),#60a5fa);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size: 18px; color: #fff;
+    }
+    h1{font-size:20px;margin:0;line-height:1.2}
+    p.lead{margin:6px 0 18px;color:var(--muted); font-size: 14px;}
+    .card{background:var(--card);border-radius:12px;padding:24px;box-shadow:0 6px 30px rgba(2,6,23,.6)}
+    .input-group { margin-bottom: 16px; }
     label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-    input[type="number"], input[type="text"]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:15px;margin-bottom:4px}
-    .small{font-size:13px;color:var(--muted);margin-bottom:14px;display:block}
-    .actions{display:flex;gap:8px;align-items:center;margin-top:12px}
-    button{background:var(--accent);border:0;padding:10px 14px;border-radius:10px;color:#042027;font-weight:600;cursor:pointer}
-    button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .result{margin-top:18px;padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
-    .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
-    .big{font-size:22px;font-weight:700}
-    footer{margin-top:12px;color:var(--muted);font-size:13px}
-    .muted-pill{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px}
+    input[type="number"], input[type="text"]{
+      width:100%; padding:12px;
+      border-radius:8px; border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);
+      color:inherit; font-size:16px; margin-bottom:4px;
+      transition: border-color 0.2s;
+    }
+    input:focus { outline: none; border-color: var(--accent); }
+    .small{font-size:12px;color:var(--muted);display:block;margin-top:4px}
+    .actions{display:flex;gap:10px;align-items:center;margin-top:20px;flex-wrap: wrap;}
+    button{
+      background:var(--accent); border:0; padding:12px 20px;
+      border-radius:8px; color:#042027; font-weight:600; cursor:pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+    button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
+    button.secondary:hover { border-color: var(--muted); color: #fff; }
+    
+    .result{margin-top:24px;padding:16px;border-radius:10px;background:rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);}
+    .row{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+    .big{font-size:24px;font-weight:700;color: var(--accent);}
+    
+    footer{margin-top:24px;color:var(--muted);font-size:12px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;}
+    .muted-pill{background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:6px;font-size:12px; margin-left: auto;}
+    .date-badge { display: inline-block; margin-top: 8px; background: rgba(6, 182, 212, 0.1); color: var(--accent); padding: 4px 8px; border-radius: 4px; font-weight: 500;}
   </style>
 </head>
 <body>
@@ -38,39 +72,39 @@
     </header>
 
     <div class="card">
-      <div>
+      <div class="input-group">
         <label>Açılış Tutarı (TL)</label>
-        <input id="opening" type="text" inputmode="decimal" value="958.33">
-        <span class="small">Varsayılan: 958,33 TL</span>
+        <input id="opening" type="text" inputmode="decimal" value="1054.17">
+        <span class="small">Varsayılan açılış ücreti.</span>
       </div>
 
-      <div>
+      <div class="input-group">
         <label>KM Başı Ücret (TL)</label>
-        <input id="perKm" type="text" inputmode="decimal" value="29.17">
-        <span class="small">Varsayılan: 29,17 TL</span>
+        <input id="perKm" type="text" inputmode="decimal" value="32.50">
+        <span class="small">Varsayılan kilometre başına ücret.</span>
       </div>
 
-      <div>
+      <div class="input-group">
         <label>Mesafe (KM)</label>
-        <input id="km" type="number" min="0" step="1" value="0">
-        <span class="small">Gidiş - Dönüş yapılan kilometre.</span>
+        <input id="km" type="number" min="0" step="1" value="0" placeholder="0">
+        <span class="small">Toplam yapılan yol (Gidiş + Dönüş).</span>
       </div>
 
       <div class="actions">
-        <button id="calc">Hesapla</button>
-        <button class="secondary" id="reset">Sıfırla</button>
-        <div style="margin-left:auto" class="muted-pill">Para birimi: TL</div>
+        <button id="calc">HESAPLA</button>
+        <button class="secondary" id="reset">SIFIRLA</button>
+        <div class="muted-pill">Birim: ₺ (TL)</div>
       </div>
 
       <div class="result" id="result" aria-live="polite" hidden>
-        <div class="row"><div class="small">Açılış Ücreti</div><div id="resOpening" class="small"></div></div>
-        <div class="row"><div class="small">Mesafe Ücreti</div><div id="resKm" class="small"></div></div>
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:8px 0" />
-        <div class="row"><div class="small">Toplam Tutar</div><div id="resTotal" class="big"></div></div>
+        <div class="row"><div class="small">Açılış Bedeli</div><div id="resOpening" class="small"></div></div>
+        <div class="row"><div class="small">Yol Bedeli</div><div id="resKm" class="small"></div></div>
+        <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.1);margin:12px 0" />
+        <div class="row"><div class="small" style="color:#fff">TOPLAM TUTAR</div><div id="resTotal" class="big"></div></div>
       </div>
 
       <footer>
-        <div>Not: Açılış ve km ücretlerini değiştirebilirsiniz. Mesafe kısmına km değerini giriniz.</div>
+        <div class="date-badge">Son Güncelleme: 02.12.2025</div>
       </footer>
     </div>
   </div>
@@ -86,6 +120,12 @@
     const resKm = document.getElementById('resKm');
     const resTotal = document.getElementById('resTotal');
 
+    // Varsayılan değerler HTML'den otomatik alınır
+    const defaults = {
+        opening: openingEl.value,
+        perKm: perKmEl.value
+    };
+
     function parseNumberSafe(str){
       if(str === null || str === undefined) return 0;
       const cleaned = String(str).replace(/,/g, '.').replace(/[^0-9.\-]/g,'');
@@ -94,7 +134,8 @@
     }
 
     function formatTL(n){
-      try{ return n.toLocaleString('tr-TR', {style:'currency', currency:'TRY'}); }catch(e){ return n.toFixed(2) + ' TL'; }
+      try{ return n.toLocaleString('tr-TR', {style:'currency', currency:'TRY', minimumFractionDigits: 2}); }
+      catch(e){ return n.toFixed(2) + ' TL'; }
     }
 
     function calculate(){
@@ -102,31 +143,33 @@
       const perKm = parseNumberSafe(perKmEl.value) || 0;
       const km = parseNumberSafe(kmEl.value) || 0;
 
-      const kmCharge = +(perKm * km);
-      const total = +(opening + kmCharge);
+      const kmCharge = perKm * km;
+      const total = opening + kmCharge;
 
       resOpening.textContent = formatTL(opening);
-      resKm.textContent = `${formatTL(kmCharge)}  (${km} km × ${formatTL(perKm)})`;
+      resKm.textContent = `${formatTL(kmCharge)} (${km} km)`;
       resTotal.textContent = formatTL(total);
+      
       resultBox.hidden = false;
-
-      return {opening, perKm, km, kmCharge, total};
+      if(window.innerWidth < 768) {
+          resultBox.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      }
     }
 
-    calcBtn.addEventListener('click', ()=>{
-      calculate();
-    });
+    calcBtn.addEventListener('click', calculate);
 
     resetBtn.addEventListener('click', ()=>{
-      openingEl.value = '958.33';
-      perKmEl.value = '29.17';
+      openingEl.value = defaults.opening;
+      perKmEl.value = defaults.perKm;
       kmEl.value = '0';
       resultBox.hidden = true;
     });
 
-    [openingEl, perKmEl, kmEl].forEach(el=>el.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') calculate(); }));
-
-    resultBox.hidden = true;
+    [openingEl, perKmEl, kmEl].forEach(el => {
+        el.addEventListener('keydown', (e)=>{ 
+            if(e.key === 'Enter') calculate(); 
+        });
+    });
   </script>
 </body>
 </html>
